@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Giỏ hàng của bạn</h2>
+
+        {% if books %}
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Tên sách</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ "{:,.0f}".format(book.price) }} đ</td>
+                    <td>
+                        <form action="{{ url_for('update_cart', bid=book.bid) }}" method="POST" class="d-flex align-items-center">
+                            <button name="action" value="decrease" class="btn btn-sm btn-outline-secondary me-1">-</button>
+                            <span class="mx-2">{{ book.quantity }}</span>
+                            <button name="action" value="increase" class="btn btn-sm btn-outline-secondary ms-1">+</button>
+                        </form>
+                    </td>
+                    
+                    <td>{{ "{:,.0f}".format(book.total) }} đ</td>
+                    <td>
+                        <a href="{{ url_for('remove_from_cart', bid=book.bid) }}" class="btn btn-danger btn-sm">Xóa</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3" class="text-end">Tổng cộng:</th>
+                    <th colspan="2">{{ "{:,.0f}".format(total) }} đ</th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="d-flex justify-content-between">
+            <a href="{{ url_for('index') }}" class="btn btn-secondary custom-orange">Tiếp tục mua sắm</a>
+            <a href="{{ url_for('checkout') }}" class="btn btn-success">Đặt hàng</a>
+        </div>
+
+        {% else %}
+            <div class="alert alert-info">Chưa có sản phẩm nào trong giỏ hàng.</div>
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Quay lại cửa hàng</a>
+        {% endif %}
+    </div>
+</body>
+</html>

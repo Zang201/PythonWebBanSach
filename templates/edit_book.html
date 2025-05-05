@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh Sửa Sách</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Chỉnh Sửa Thông Tin Sách</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Tiêu đề</label>
+                <input type="text" class="form-control" name="title" id="title" value="{{ book[1] }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="author" class="form-label">Tác giả</label>
+                <input type="text" class="form-control" name="author" id="author" value="{{ book[2] }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Giá</label>
+                <input type="number" min="0" step="0.01" class="form-control" name="price" id="price" value="{{ book[3] }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Mô tả</label>
+                <textarea class="form-control" name="description" id="description" rows="3" required>{{ book[4] }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="cateid" class="form-label">Danh mục</label>
+                <select class="form-select" name="cateid" id="cateid" required>
+                    {% for cate in categories %}
+                        <option value="{{ cate[0] }}" {% if cate[0] == book[6] %}selected{% endif %}>{{ cate[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Hình ảnh hiện tại</label><br>
+                <img src="{{ url_for('static', filename='uploads/' ~ book[5]) }}" width="150" class="mb-2"><br>
+                <label for="image" class="form-label">Thay ảnh (nếu cần)</label>
+                <input type="file" class="form-control" name="image" id="image">
+                <input type="hidden" name="current_image" value="{{ book[5] }}">
+            </div>
+
+            <button type="submit" class="btn btn-success">Cập nhật</button>
+        </form>
+    </div>
+</body>
+</html>
+    

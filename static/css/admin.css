@@ -1,0 +1,27 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.text-primary {
+    color: #e67300 !important;
+}
+
+.card-header.bg-primary {
+    background-color: #e67300 !important;
+    border-color: #e67300;
+}
+
+.list-group-item.active {
+    background-color: #e67300;
+    border-color: #e67300;
+}
+
+.btn-success, .btn-warning, .btn-danger {
+    font-weight: bold;
+}
+
+a.btn-outline-secondary:hover {
+    background-color: #e67300;
+    color: #fff;
+    border-color: #e67300;
+}

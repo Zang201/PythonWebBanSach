@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Sách Mới</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Thêm Sách Mới</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Tiêu đề</label>
+                <input type="text" class="form-control" name="title" id="title" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="author" class="form-label">Tác giả</label>
+                <input type="text" class="form-control" name="author" id="author" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Giá</label>
+                <input type="number" min="0" step="0.01" class="form-control" name="price" id="price" required>
+            </div>
+
+            <!-- // Thêm trường giảm giá -->
+            <!-- <div class="mb-3">
+                <label for="discount" class="form-label">Giảm giá (%)</label>
+                <input type="number" name="discount" id="discount" class="form-control" value="{{ book.discount if book else 0 }}" min="0" max="100">
+            </div>             -->
+            <div class="mb-3">
+                <label for="description" class="form-label">Mô tả</label>
+                <textarea class="form-control" name="description" id="description" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="cateid" class="form-label">Danh mục</label>
+                <select class="form-select" name="cateid" id="cateid" required>
+                    {% for cate in categories %}
+                        <option value="{{ cate[0] }}">{{ cate[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Hình ảnh</label>
+                <input type="file" class="form-control" name="image" id="image">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Thêm Sách</button>
+        </form>
+    </div>
+</body>
+</html>

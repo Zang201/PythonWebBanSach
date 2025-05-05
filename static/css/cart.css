@@ -1,0 +1,65 @@
+/* Màu chữ chính */
+.text-orange-bold {
+    color: #e67300;
+    font-weight: bold;
+}
+
+/* Tiêu đề trang */
+h2 {
+    color: #e67300;
+    font-weight: bold;
+}
+
+/* Bảng */
+.table thead th {
+    background-color: #e67300 !important;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Tổng tiền */
+tfoot th.text-orange-bold,
+tfoot td.text-orange-bold {
+    font-weight: bold;
+    color: #e67300;
+}
+
+/* Nút tăng/giảm */
+button[name="action"] {
+    border: 1px solid #e67300;
+    color: #e67300;
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+button[name="action"]:hover {
+    background-color: #e67300;
+    color: white;
+}
+
+/* Nút Xóa */
+.btn-danger {
+    background-color: #e67300;
+    border-color: #e67300;
+}
+
+.btn-danger:hover {
+    background-color: #cc6600;
+    border-color: #cc6600;
+}
+
+/* Nút khác */
+.btn-success, .btn-secondary {
+    font-weight: bold;
+}
+.custom-orange {
+    background-color: #e67300;
+    border-color: #e67300;
+    color: white;
+    font-weight: bold;
+}
+
+.custom-orange:hover {
+    background-color: #cc6600;
+    border-color: #cc6600;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Xác nhận xóa sách</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Xác nhận xóa sách</h2>
+    <p>Bạn có chắc chắn muốn xóa cuốn sách sau không?</p>
+    <ul>
+        <li><strong>Tiêu đề:</strong> {{ book[1] }}</li>
+        <li><strong>Tác giả:</strong> {{ book[2] }}</li>
+        <li><strong>Giá:</strong> {{ book[3] }}</li>
+        <li><strong>Mô tả:</strong> {{ book[4] }}</li>
+    </ul>
+    
+    <form method="POST">
+        <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+        <a href="{{ url_for('booksmanage') }}" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+</body>
+</html>

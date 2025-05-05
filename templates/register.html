@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký tài khoản</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+    <div class="container mt-5" style="max-width: 500px;">
+        <h2 class="mb-4 text-center" style="color: #e67300;">Đăng ký tài khoản</h2>
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <form method="POST" action="{{ url_for('register') }}">
+            <div class="mb-3">
+                <label for="username" class="form-label">Tên đăng nhập</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Xác nhận mật khẩu</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" style="background-color: #e67300; border: none;">Đăng ký</button>
+            <p class="text-center mt-3">Đã có tài khoản? <a href="{{ url_for('login') }}">Đăng nhập</a></p>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% if books %}
+    <h2>Kết quả tìm kiếm</h2>
+    <div class="book-list">
+        {% for book in books %}
+        <article class="book">
+            <img src="{{ url_for('static', filename='images/' + book[5]) }}" alt="{{ book[1] }}" class="book-image">
+            <h3>{{ book[1] }}</h3>
+            <p class="author">Tác giả: {{ book[2] }}</p>
+            <p class="price">Giá: {{ "{:,.0f}".format(book[3]) }}đ</p>
+            <div class="book-buttons">
+                <form action="{{ url_for('add_to_cart', bid=book[0]) }}" method="POST">
+                    <button type="submit" class="btn btn-sm btn-outline-primary">
+                        <img src="{{ url_for('static', filename='images/cart.png') }}" width="20"> Thêm giỏ hàng
+                    </button>
+                </form>
+                <button class="btn btn-sm btn-outline-danger">
+                    <img src="{{ url_for('static', filename='images/heart.png') }}" width="20"> Yêu thích
+                </button>
+            </div>
+            <p class="description">{{ book[4] }}</p>
+        </article>
+        {% endfor %}
+    </div>
+{% else %}
+    <h3>Không tìm thấy kết quả nào.</h3>
+{% endif %}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin giao hàng</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/checkout.css') }}">
+</head>
+<body>
+    <div class="container mt-5 checkout-form">
+        <h2 class="mb-4 text-center">Thông tin giao hàng</h2>
+        <form action="{{ url_for('checkout') }}" method="POST">
+            <div class="mb-3">
+                <label for="fullname" class="form-label">Họ và tên</label>
+                <input type="text" name="fullname" id="fullname" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Địa chỉ</label>
+                <input type="text" name="address" id="address" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Số điện thoại</label>
+                <input type="text" name="phone" id="phone" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="note" class="form-label">Ghi chú</label>
+                <textarea name="note" id="note" class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-submit">Xác nhận đặt hàng</button>
+        </form>
+    </div>
+</body>
+</html>

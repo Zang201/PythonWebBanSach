@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý hóa đơn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/orders.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card p-4">
+            <h2 class="mb-4 text-primary">Danh sách hóa đơn</h2>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Mã hóa đơn</th>
+                            <th>Người đặt</th>
+                            <th>Tổng tiền</th>
+                            <th>Ngày tạo</th>
+                            <th>Chi tiết</th>
+                            <th>Xóa hóa đơn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>#{{ order[0] }}</td>
+                            <td>{{ order[1] }}</td>
+                            <td><span class="badge bg-success">{{ "{:,.0f}".format(order[2]) }} đ</span></td>
+                            <td>{{ order[3] }}</td>
+                            <td>
+                                <a href="{{ url_for('order_detail', id=order[0]) }}" class="btn btn-sm btn-outline-info">
+                                    Xem chi tiết
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ url_for('delete_order', id=order[0]) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa hóa đơn này?');">
+                                    Xóa
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-end">
+                <a href="{{ url_for('admin') }}" class="btn btn-secondary mt-3">⬅ Quay lại trang admin</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit category</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">    
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    
+</head>
+<body>
+   <div class="container">
+    <div class="row">
+        <div class="col-9">
+            <h1>Admin page</h1>
+        </div>
+        <div class="col-3">
+            {% if session['user'] %}
+            <h3>Welcome {{ session['user'][1] }}</h3>
+            <a href="{{ url_for('login') }}">Đăng xuất</a>
+        {% else %}
+            <script>
+                window.location.href = "{{ url_for('login') }}";
+            </script>
+        {% endif %}
+        </div>
+        <hr>
+   </div>
+   <div class="row">
+   <h1> Delete category </h1>
+   <form method="post">
+        <label for="">Tên chuyên mục:</label>
+        <input type="text" name="catename" id="catename" required value="{{ category[1] }}" readonly>        
+        <button type="submit" class="button btn-primary">Xóa</button>
+    </form> 
+    <a href="{{ url_for('admin') }}" class="btn btn-primary">Quay lại</a>
+   </div>
+</body>
+</html>

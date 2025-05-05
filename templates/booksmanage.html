@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sách</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</head>
+<body class="bg-light">
+
+    <div class="container py-4">
+        <!-- Header -->
+        <div class="row mb-3 align-items-center">
+            <div class="col-md-9">
+                <h2 class="text-primary fw-bold">Trang quản lý sách</h2>
+            </div>
+            <div class="col-md-3 text-end">
+                {% if session['user'] %}
+                    <div class="text-muted mb-1">Xin chào, <strong>{{ session['user'][1] }}</strong></div>
+                    <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('login') }}">Đăng xuất</a>
+                {% else %}
+                    <script>
+                        window.location.href = "{{ url_for('login') }}";
+                    </script>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 mb-3">
+                <div class="list-group shadow-sm">
+                    <a href="#" class="list-group-item list-group-item-action active">Quản lí panel</a>
+                    <a href="{{ url_for('admin') }}" class="list-group-item list-group-item-action">Quản lí danh mục</a>
+                    <a href="{{ url_for('booksmanage') }}" class="list-group-item list-group-item-action">Quản lí sách</a>
+                    <a href="#" class="list-group-item list-group-item-action">Quản lí hóa đơn</a>
+                    <a href="#" class="list-group-item list-group-item-action">Quản lí người dùng</a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Danh sách sách</h5>
+                        <a href="{{ url_for('add_book') }}" class="btn btn-light btn-sm">➕ Thêm sách mới</a>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Mã sách</th>
+                                    <th>Tên sách</th>
+                                    <th>Phân loại</th>
+                                    <th>Mô tả</th>
+                                    <th>Giá</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for book in b %}
+                                <tr>
+                                    <td>{{ book[0] }}</td>
+                                    <td>{{ book[1] }}</td>
+                                    <td>{{ book[2] }}</td>
+                                    <td>{{ book[3] }}</td>
+                                    <td>{{ book[4] }}</td>
+                                    <td>
+                                        <a href="{{ url_for('edit_book', id=book[0]) }}" class="btn btn-sm btn-warning">Sửa</a>
+                                        <a href="{{ url_for('delete_book', id=book[0]) }}" class="btn btn-sm btn-danger">Xóa</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% if not b %}
+                        <div class="alert alert-info">Không có sách nào trong hệ thống.</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

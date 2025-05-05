@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_user.css') }}">
+
+<div class="card mt-5">
+  <div class="card-header">
+    Chỉnh sửa người dùng
+  </div>
+  <div class="card-body">
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label">Tên đăng nhập</label>
+        <input type="text" name="username" class="form-control" value="{{ user[1] }}" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" value="{{ user[2] }}" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Mật khẩu</label>
+        <input type="text" name="password" class="form-control" value="{{ user[3] }}" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Phân quyền</label>
+        <select name="role" class="form-control">
+          <option value="0" {% if user[4] == 0 %}selected{% endif %}>User</option>
+          <option value="1" {% if user[4] == 1 %}selected{% endif %}>Admin</option>
+        </select>
+      </div>
+      <div class="d-flex justify-content-end gap-2 mt-4">
+        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+        <a href="{{ url_for('users') }}" class="btn btn-primary1">Quay lại danh sách người dùng</a>
+    </div>
+    </form>
+  </div>
+</div>
+
+

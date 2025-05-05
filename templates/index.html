@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ website bán sách</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1 class="page-title">Chào mừng đến với cửa hàng sách của chúng tôi</h1>
+        <nav>
+            <ul class="navbar">
+                <li><a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Trang chủ</a></li>
+                <li><a href="#"><i class="fas fa-book"></i> Sách</a></li>
+        
+                <!-- Thanh tìm kiếm ở giữa -->
+                <li class="search-box">
+                    <form action="{{ url_for('search') }}" method="GET">
+                        <input type="text" name="q" placeholder="Tìm kiếm sách...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </li>
+        
+                <li style="position: relative;">
+                    <a href="{{ url_for('cart') }}">
+                        <i class="fas fa-shopping-cart"></i> Giỏ hàng
+                        {% if cart_count > 0 %}
+                            <span class="cart-count">{{ cart_count }}</span>
+                        {% endif %}
+                    </a>
+                </li>                
+                <li><a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
+            </ul>
+        </nav>        
+    </header>
+
+    <main>
+        {% if search %}
+            {% include 'search_results.html' %}
+        {% else %}
+            <section>
+                <h2 class="chude"> Sách mới</h2>
+                <div class="book-list">
+                    {% for book in books %}
+    {% if loop.index == 5 %}
+        </div> <!-- Kết thúc book-list đầu tiên -->
+        <h2 class="chude">Sách nhiều người mua</h2>
+        <div class="book-list"> <!-- Bắt đầu book-list mới -->
+    {% endif %}
+
+    <article class="book">
+        <img src="{{ url_for('static', filename='images/' + book[5]) }}" alt="{{ book[1] }}" class="book-image">
+        <h3><a href="{{ url_for('book_detail', bid=book[0]) }}">{{ book[1] }}</a></h3>
+        <p class="author">Tác giả: {{ book[2] }}</p>
+        <p class="price">Giá: {{ "{:,.0f}".format(book[3]) }}đ</p>
+        <div class="book-buttons d-flex justify-content-center gap-2 my-2">
+            <form action="{{ url_for('add_to_cart', bid=book[0]) }}" method="POST">
+                <button type="submit" class="btn btn-sm btn-outline-primary d-flex align-items-center justify-content-center equal-button">
+                    <img src="{{ url_for('static', filename='images/cart.png') }}" width="20" class="me-1"> Thêm giỏ hàng
+                </button>
+            </form>
+            <form action="{{ url_for('buy_now', bid=book[0]) }}" method="POST">
+                <button type="submit" class="btn btn-sm btn-outline-danger d-flex align-items-center justify-content-center equal-button">
+                    Mua ngay
+                </button>
+            </form>            
+        </div>                                                    
+        <p class="description">{{ book[4] }}</p>
+    </article>
+{% endfor %}
+                </div>
+            </section>
+
+            <section>
+                <h2>Khuyến mãi</h2>
+                <p>Thông tin về các chương trình khuyến mãi hiện tại.</p>
+            </section>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Cửa hàng sách. Mọi quyền được bảo lưu.</p>
+    </footer>
+</body>
+</html>

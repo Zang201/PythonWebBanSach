@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin_users.css') }}">
+
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Danh sách người dùng</h5>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Tên đăng nhập</th>
+            <th>Email</th>
+            <th>Phân quyền</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>{{ user[0] }}</td>
+            <td>{{ user[1] }}</td>
+            <td>{{ user[2] }}</td>
+            <td>{{ 'Admin' if user[3] == 1 else 'User' }}</td>
+            <td>
+              <a href="{{ url_for('edit_user', uid=user[0]) }}" class="btn btn-sm btn-warning">Sửa</a>
+              <a href="{{ url_for('delete_user', uid=user[0]) }}"
+               class="btn btn-sm btn-danger"
+                onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');">Xóa</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Nút quay lại phía dưới bên trái -->
+  <div class="back-button-container mt-3">
+    <a href="{{ url_for('admin') }}" class="btn btn-outline-primary back-button">
+      ← Quay lại trang quản trị
+    </a>
+  </div>
+  

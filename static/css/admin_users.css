@@ -1,0 +1,113 @@
+/* Tổng thể */
+body {
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Card hiển thị danh sách */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.08);
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.card-header {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 16px 24px;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* Bảng nằm sát viền, full chiều ngang */
+.card-body {
+    padding: 0;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+}
+
+.table thead th {
+    background-color: #e3f0ff;
+    color: #007bff;
+    font-weight: 600;
+    text-align: center;
+    padding: 14px;
+    border-bottom: 2px solid #007bff;
+}
+
+.table tbody td {
+    padding: 14px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+/* Hover nhẹ nhàng */
+.table-hover tbody tr:hover {
+    background-color: #f0f9ff;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Nút */
+.btn {
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 6px 14px;
+    transition: all 0.2s ease-in-out;
+    font-size: 0.9rem;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-outline-primary {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 6px 14px;
+    transition: 0.2s;
+    border: 1px solid #007bff;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Nút quay lại nằm dưới bên trái */
+.back-btn-wrapper {
+    margin-top: 20px;
+    text-align: left;
+}

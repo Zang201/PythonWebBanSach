@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết đơn hàng #{{ order[0] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <style>
+        @media print {
+            .no-print {
+                display: none;
+            }
+            .contact-print {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 id="order-title">Chi tiết đơn hàng #{{ order[0] }}</h2>
+
+        <div class="mb-3">
+            <p><strong>Khách hàng:</strong> {{ order[1] }}</p>
+            <p><strong>Số điện thoại:</strong> {{ order[4] }}</p>
+            <p><strong>Địa chỉ:</strong> {{ order[5] }}</p>
+            <p><strong>Ngày tạo:</strong> {{ order[3] }}</p>
+            <p><strong>Tổng tiền:</strong> <span class="text-danger">{{ "{:,.0f}".format(order[2]) }} đ</span></p>
+        </div>
+
+        <h4>Sản phẩm trong đơn hàng</h4>
+        <table class="table table-bordered">
+            <thead class="table-secondary">
+                <tr>
+                    <th>Tên sách</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item[0] }}</td>
+                    <td>{{ "{:,.0f}".format(item[1]) }} đ</td>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ "{:,.0f}".format(item[1] * item[2]) }} đ</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-between">
+            <a href="{{ url_for('orders') }}" class="btn btn-secondary mt-3 no-print">← Quay lại danh sách đơn hàng</a>
+            <button class="btn btn-success mt-3 no-print" onclick="printInvoice();">In hóa đơn</button>
+        </div>
+
+        <!-- Thêm phần hiển thị liên hệ khi in -->
+        <div class="contact-print no-print mt-3">
+            <p>Mọi thắc mắc xin liên hệ: 18006868 xin cảm ơn!</p>
+        </div>
+    </div>
+
+    <script>
+        function printInvoice() {
+            // Thay đổi tiêu đề khi in
+            document.getElementById('order-title').innerHTML = 'Cảm ơn quý khách đã mua hàng.';
+
+            // Ẩn phần "Quay lại danh sách đơn hàng" khi in
+            document.querySelector('.no-print').style.display = 'none';
+
+            // Hiển thị phần thông tin liên hệ khi in
+            document.querySelector('.contact-print').style.display = 'block';
+
+            // Mở hộp thoại in của trình duyệt
+            window.print();
+
+            // Sau khi in xong, khôi phục lại tiêu đề ban đầu
+            setTimeout(function() {
+                document.getElementById('order-title').innerHTML = 'Chi tiết đơn hàng #{{ order[0] }}';
+
+                // Khôi phục lại phần "Quay lại danh sách đơn hàng"
+                document.querySelector('.no-print').style.display = 'block';
+
+                // Ẩn phần liên hệ khi in xong
+                document.querySelector('.contact-print').style.display = 'none';
+            }, 1000); // Khôi phục sau 1 giây để đảm bảo không bị ảnh hưởng
+        }
+    </script>
+</body>
+</html>

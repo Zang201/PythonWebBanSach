@@ -1,0 +1,28 @@
+body {
+    background-color: #f0f2f5;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    border-radius: 12px;
+    border: none;
+    background-color: #fff;
+}
+
+.card-title {
+    color: #e67300;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: #e67300;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #cc5c00;
+}
+
+.btn-secondary {
+    margin-left: 10px;
+}

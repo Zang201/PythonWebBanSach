@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book[1] }} - Chi tiết sách</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/book_detail.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+    <div class="book-detail-container">
+        <img src="{{ url_for('static', filename='images/' + book[5]) }}" alt="{{ book[1] }}" class="book-detail-image">
+    
+        <div class="book-detail-info">
+            <h2 class="book-detail-title">{{ book[1] }}</h2>
+            <p class="book-detail-author">Tác giả: {{ book[2] }}</p>
+            <p class="book-detail-price">Giá: {{ "{:,.0f}".format(book[3]) }}đ</p>
+            <p class="book-detail-description">{{ book[4] }}</p>
+    
+            <div class="book-detail-buttons">
+                <form action="{{ url_for('add_to_cart', bid=book[0]) }}" method="POST">
+                    <button type="submit" class="btn btn-outline-primary">
+                        <i class="fas fa-cart-plus me-1"></i> Thêm vào giỏ
+                    </button>
+                </form>
+                <form action="{{ url_for('buy_now', bid=book[0]) }}" method="POST">
+                    <button type="submit" class="btn btn-outline-danger">
+                        <i class="fas fa-bolt me-1"></i> Mua ngay
+                    </button>
+                </form>
+            </div>
+            <div class="mt-3">
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i> Quay lại
+                </a>
+            </div>            
+        </div>
+    </div>    
+</body>
+</html>
