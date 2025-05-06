@@ -25,5 +25,14 @@ Dự án bao gồm các tính năng như đăng nhập người dùng, duyệt s
    ```bash
    git clone https://github.com/Zang201/PythonWebBanSach.git
    cd PythonWebBanSach
-2. Cài đặt Xampp phiên bảng 7.4.27
-3. Chạy file app.py
+2. Tạo môi trường ảo và kích hoạt:
+   python -m venv venv
+   source venv/bin/activate     # Trên Windows: venv\Scripts\activate
+3. Cài đặt các thư viện cần thiết:
+   pip install -r requirements.txt
+4. Chạy ứng dụng
+   python app.py
+👨‍💻 Tác giả
+Trần Chí Vân
+Fresher Mobile & Web Developer
+
